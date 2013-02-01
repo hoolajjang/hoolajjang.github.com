@@ -5,6 +5,12 @@
 </head>
 <body>
 <div id="fb-root"></div>
+<div id="login">
+	<p><button onClick="loginUser();">Login</button></p>
+</div>
+<div id="logout">
+	<p><button  onClick="FB.logout();">Logout</button></p>
+</div>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -26,6 +32,8 @@
      js.src = "//connect.facebook.net/en_US/all.js";
      ref.parentNode.insertBefore(js, ref);
    }(document));
+   
+   FB.login(function(response) { }, {scope:'email'});
 </script>
 </body>
 </html>
