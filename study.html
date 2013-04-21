@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+  <title>javasript study</title>
+</head>
+<body>
+<div id=""></div>
+<script>
+var strResult = "",
+    divResult = $("#divResult"),
+    write = function (str) {
+        divResult.append(str + "<br />");
+    };
+
+//40p
+var empty_object = {};
+
+var stooge = {
+    "first-name": "Jerome", //first-name이 예약어랍니다. 확인.
+    "last-name": "Howard"
+};
+
+var flight = {
+    airline: "Oceanic",
+    number: 815,
+    departure: {
+        IATA: "SYD",
+        time: "2004-09-22 14:55",
+        city: "Sydney"
+    },
+    arrival: {
+        IATA: "LAX",
+        time: "2004-09-23 10:42",
+        city: "Los Angeles"
+    }
+};
+
+//41p
+write(stooge["first-name"]);
+write(flight.departure.IATA);
+/*
+write(stooge["middle-name"]);
+write(flight.status);
+write(stooge["FIRST-NAME"]);
+*/
+//42p
+var middle = stooge["middle-name"] || "(none)";
+var status = flight.status || "unknown";
+/*
+write(flight.equipment);
+try {
+    write(flight.equipment.model);
+} catch(e) {
+    write(e.message);
+}
+write(flight.equipment && flight.equiment.model);
+*/
+stooge["middle-name"] = "Lester";
+stooge.nickname = "Curly";
+flight.equiment = {
+    model: "Boeing 777"
+};
+flight.status = "overdue";
+
+var x = stooge;
+x.nickname = "Curly";
+var nick = stooge.nickname;
+
+//43p
+var a = {}, b = {}, c = {};
+a.ttt = "test1111!!!";
+/*
+write(a.ttt);
+write(b.ttt);
+*/
+a = b = c = {};
+a.ttt = "test2222!!!";
+/*
+write(a.ttt);
+write(b.ttt);
+*/
+
+//44p
+/*
+if(typeof(Object.create) !== "function") {
+    Object.create = function(o) {
+        var F = function() {}; //빈 메소드를 지역객체로 만들고
+        F.prototype = o; //빈 메소드의 전달받은 객체를 상속 받도록 만들고
+        return new F(); //이 메소드를 인스턴스화 시켜서 리턴
+    };
+}
+
+var another_stooge = Object.create(stooge);
+//stooge를 상속받은 세로운 객체를 another_stooge에 대입
+*/
+//위 메소드를 안쓰면...
+var another_stooge;
+another_stooge.prototype = stooge;
+
+another_stooge["first-name"] = "Harry";
+another_stooge["middle-name"] = "Moses";
+another_stooge.nickname = "Moe";
+stooge.profession = "actor";
+write(another_stooge.profession);
+
+</script>
+</body>
+</html>
