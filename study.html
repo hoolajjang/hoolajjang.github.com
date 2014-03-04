@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+  <title>javasript study</title>
+  <script src="javascripts/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div id="divResult"></div>
+<script>
+var strResult = "",
+    divResult = $("#divResult"),
+    write = function (str) {
+        divResult.append(str + "<br />");
+    };
+
+//40p
+var empty_object = {};
+
+var stooge = {
+    "first-name": "Jerome", //first-name이 예약어랍니다. 확인.
+    "last-name": "Howard"
+};
+
+var flight = {
+    airline: "Oceanic",
+    number: 815,
+    departure: {
+        IATA: "SYD",
+        time: "2004-09-22 14:55",
+        city: "Sydney"
+    },
+    arrival: {
+        IATA: "LAX",
+        time: "2004-09-23 10:42",
+        city: "Los Angeles"
+    }
+};
+
+//41p
+write(stooge["first-name"]);
+write(flight.departure.IATA);
+/*
+write(stooge["middle-name"]);
+write(flight.status);
+write(stooge["FIRST-NAME"]);
+*/
+//42p
+var middle = stooge["middle-name"] || "(none)";
+var status = flight.status || "unknown";
+/*
+write(flight.equipment);
+try {
+    write(flight.equipment.model);
+} catch(e) {
+    write(e.message);
+}
+write(flight.equipment && flight.equiment.model);
+*/
+stooge["middle-name"] = "Lester";
+stooge.nickname = "Curly";
+flight.equiment = {
+    model: "Boeing 777"
+};
+flight.status = "overdue";
+
+var x = stooge;
+x.nickname = "Curly";
+var nick = stooge.nickname;
+
+//43p
+var a = {}, b = {}, c = {};
+a.ttt = "test1111!!!";
+/*
+write(a.ttt);
+write(b.ttt);
+*/
+a = b = c = {};
+a.ttt = "test2222!!!";
+/*
+write(a.ttt);
+write(b.ttt);
+*/
+
+//44p
+if(typeof Object.create !== "function") {
+    Object.create = function(o) {
+        var F = function() {}; //빈 메소드를 지역객체로 만들고
+        F.prototype = o; //빈 메소드의 전달받은 객체를 상속 받도록 만들고
+        return new F(); //이 메소드를 인스턴스화 시켜서 리턴
+    };
+}
+
+var another_stooge = Object.create(stooge); //stooge를 상속받은 세로운 객체를 another_stooge에 대입
+var other_stooge = Object.create(stooge); //똑같이 상속받은 새로운 객체
+
+
+another_stooge["first-name"] = "Harry";
+another_stooge["middle-name"] = "Moses";
+another_stooge.nickname = "Moe";
+stooge.profession = "actor"; //profession은 정의 한적이 없음. 처음 갱신하는 값이라 stooge에 여기서 최초 할당됨.
+/*
+write(another_stooge.profession); //이 객체에는 profession값을 갱신한 적이 없어 상위 객체인 stooge로 chainning 되어 올라가 검색된다
+write(other_stooge.profession); //마찬가지
+write(other_stooge.nickname); //another_stooge에서 변경한 내용은 반영되지 않음
+*/
+
+another_stooge.profession = "student"; //이제서야 갱신을 통해 해당 객체에 속성을 할당
+stooge.profession = "actor"; //부모 클래스의 값을 변경
+/*
+write(another_stooge.profession); //이제는 이 객체에 속성이 있으므로 chainning을 통해 부모객체를 탐색할 필요가 없다.
+write(other_stooge.nothing); //other_stooge -> stooge -> Object 순으로 chainning 탐색해봐도 속성이 없어 undefined가 떨어짐
+*/
+
+//45p
+/*
+write(typeof flight.number);
+write(typeof flight.status);
+write(typeof flight.arrival);
+write(typeof flight.mainfest);
+write(typeof flight.toString);
+write(typeof flight.constructor);
+
+write(flight.number); //값 있음
+write(flight.constructor); //Object.constructor -> native function
+*/
+
+//46p
+var name;
+/*
+for(name in another_stooge) {
+	if(typeof another_stooge[name] !== "function") {
+		write(name + ": " + another_stooge[name]);
+	}
+}
+*/
+
+var i, l;
+var properties = [
+	"first-name",
+	"middle-name",
+	"last-name",
+	"profession"
+];
+/*
+for(i = 0, l = properties.length; i < l; i++) {
+	write(properties[i] + ": " + another_stooge[properties[i]]); //음... 이거 좀 맘에 안드는데... 다른 좋은 방법은?
+}
+*/
+
+/*
+write(another_stooge.nickname);
+delete another_stooge.nickname; //오... 첨봄... ㅠㅠ
+write(another_stooge.nickname);
+
+//Object가 가지고 있는 native 속성은 지워지는가?
+//오류도 안나고 지워지지 않음 =_=;; 방탄임.
+write(another_stooge.toString);
+delete another_stooge.toString;
+write(another_stooge.toString);
+
+write(Object.toString);
+delete Object.toString;
+write(Object.toString);
+*/
+
+//47p
+var MYAPP = {};
+MYAPP.stooge = stooge;
+MYAPP.flight = flight;
+</script>
+</body>
+</html>
