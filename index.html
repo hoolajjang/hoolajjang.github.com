@@ -49,7 +49,17 @@
       <p><a href="market://dev?id=7094451509111429462">market://dev?id=7094451509111429462</a></p>
       <p><a href="market://details?id=com.ftt.lostkaos">market://details?id=com.ftt.lostkaos</a></p>
       <p><a href="market://search?q=pub%3A4%3A33&c=apps">market://search?q=pub%3A4%3A33&c=apps</a></p>
+	  <p><button id="btnOpen">Open</button></p>
     </div>
   </div>
+  <script>
+  (function() {
+    $(function() {
+	  $("#btnOpen").on("click", function() {
+        window.location.href="market://details?id=com.ftt.lostkaos";
+      }
+	});
+  })();
+  </script>
 </body>
 </html>
