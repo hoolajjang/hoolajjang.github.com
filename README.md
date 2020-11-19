@@ -1,2 +1,0 @@
-# hoolajjang.github.io
-
